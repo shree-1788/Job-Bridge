@@ -4,7 +4,7 @@ type FormRowProps = {
   labelText?: string;
   defaultValue?: string | "";
   type: string;
-  onChange: (value: string) => void;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   value: string;
 };
 
@@ -17,7 +17,7 @@ const FormRow: React.FC<FormRowProps> = ({
   onChange,
 }) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    onChange(e.target.value);
+    onChange(e);
   };
 
   return (
@@ -33,6 +33,7 @@ const FormRow: React.FC<FormRowProps> = ({
         defaultValue={defaultValue}
         value={value}
         onChange={handleChange}
+        className="form-input"
       />
     </div>
   );

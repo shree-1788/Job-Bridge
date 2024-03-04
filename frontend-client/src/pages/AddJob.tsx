@@ -1,6 +1,13 @@
 import React from "react";
+// import { FormRow, FormRowSelect } from "../components";
 const AddJob: React.FC = () => {
-  return <div>AddJob</div>;
+  return (
+    <>
+      <div>
+        <form action="submit" method="post"></form>
+      </div>
+    </>
+  );
 };
 
 export default AddJob;

@@ -13,6 +13,7 @@ import {
   Admin,
 } from "./pages";
 import { ToastContainer } from "react-toastify";
+import { GlobalStyle } from "./styles/global.ts";
 
 const router = createBrowserRouter([
   {
@@ -68,6 +69,7 @@ function App() {
       {" "}
       <RouterProvider router={router} />
       <ToastContainer />
+      <GlobalStyle />
     </>
   );
 }
