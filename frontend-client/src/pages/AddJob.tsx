@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FormRow, FormRowSelect } from "../components";
-import { useNavigation } from "react-router-dom";
+import { useNavigation, useNavigate } from "react-router-dom";
 import Wrapper from "../assets/wrappers/AddJob";
 import { customFetch } from "../utils/customFetch";
 import {
@@ -10,6 +10,7 @@ import {
   JOB_TYPE_TYPE,
 } from "../utils/interfaces";
 import { toast } from "react-toastify";
+import axios from "axios";
 
 interface IFormDataJob {
   company: string;
@@ -21,6 +22,7 @@ interface IFormDataJob {
 
 const AddJob: React.FC = () => {
   const navigation = useNavigation();
+  const navigate = useNavigate();
   const isSubmitting = navigation.state === "submitting";
   const [formData, setFormData] = useState<IFormDataJob>({
     company: "",
@@ -42,9 +44,17 @@ const AddJob: React.FC = () => {
     e.preventDefault();
     try {
       await customFetch.post("/job", formData);
-      toast.success("Success Notification !");
+      console.log(formData);
+
+      // toast.succe("Success Notification !");
+      alert("Success job added");
+      return navigate("/dashboard");
     } catch (error) {
-      toast.error("error occured adding job");
+      // toast.error("error occured adding job");
+      alert("error occured adding job");
+
+      console.log(error);
+
       return error;
     }
   };

@@ -31,10 +31,10 @@ const Login: React.FC = () => {
     e.preventDefault();
     try {
       await customFetch.post("/auth/login", formData);
-      toast("Success login");
+      alert("Success login");
       return navigate("/dashboard");
     } catch (error) {
-      toast.error("Login failed");
+      alert("Login failed");
       return error;
     }
   };

@@ -2,6 +2,7 @@ import React from "react";
 import Wrapper from "../assets/wrappers/Navbar";
 import Logo from "./Logo";
 import { FaAlignLeft } from "react-icons/fa";
+import LogoutContainer from "./Logout";
 
 const Navbar: React.FC = () => {
   const toggleSidebar = () => {};
@@ -19,7 +20,7 @@ const Navbar: React.FC = () => {
 
         <div className="btn-container">
           {/* <ThemeToggle /> */}
-          {/* <LogoutContainer /> */}
+          <LogoutContainer />
         </div>
       </div>
     </Wrapper>

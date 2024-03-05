@@ -35,10 +35,10 @@ const Register: React.FC = () => {
     e.preventDefault();
     try {
       await customFetch.post("/auth/register", formData);
-      toast.success("Register successful");
+      alert("Register successful");
       return navigate("/login");
     } catch (error) {
-      toast.error("not able to register");
+      alert("not able to register");
       return error;
     }
   };
