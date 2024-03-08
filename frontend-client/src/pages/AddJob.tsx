@@ -42,9 +42,9 @@ const AddJob: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const token = localStorage.getItem("token");
     try {
-      await customFetch.post("/job", formData);
-      console.log(formData);
+      await customFetch.post("/job", { token, formData });
 
       // toast.succe("Success Notification !");
       alert("Success job added");

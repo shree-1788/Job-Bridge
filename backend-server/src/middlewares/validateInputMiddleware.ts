@@ -1,6 +1,7 @@
 import { Request, Response,NextFunction } from "express";
 import {z, ZodError} from "zod";
 import { StatusCodes } from "http-status-codes";
+import { ObjectId } from "mongodb";
 
 
 function validateData(schema: z.ZodObject<any, any>) {
@@ -41,6 +42,17 @@ export const registerValidateData = validateData(z.object({
 export const loginValidateData = validateData(z.object({
     email: z.string({required_error: "Email is required", invalid_type_error: "Email is of type string"},).email(),
     password: z.string({required_error: "Password is required"}).min(6,{message: "Password is of min 6 characters"})
+}));
+
+
+export const jobValidateData = validateData(z.object({
+    company : z.string({required_error: "Company is required", invalid_type_error: "Company is of type string"}),
+    position : z.string({required_error: "Position is required", invalid_type_error: "Position is of type string"}),
+    location : z.string({required_error: "Location is required", invalid_type_error: "Location is of type string"}),
+    jobStatus: z.string(),
+    jobType: z.string(),
+    // createdBy : z.instanceof(ObjectId)
+    
 }));
 
 

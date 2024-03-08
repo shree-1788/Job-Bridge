@@ -2,12 +2,12 @@ import { Request,Response } from "express"
 import userModel from "../user/user.model";
 import { hashPassword, comaprePassword } from "../utils/password";
 import UnAuthenticatedError from "../errors/UnAuthenticatedError";
-import JWTService, {JWTUser} from "../utils/jwt";
+import {JWTUser, generateUserToken} from "../utils/jwt";
+import { log } from "console";
 
 export const register = async(req:Request,res:Response) => {
 
     // pasword hash
-
     
     const hashedPassword =  await hashPassword(req.body.password);
     req.body.password = hashedPassword;
@@ -24,15 +24,17 @@ export const login = async(req:Request,res:Response) => {
 
     if(!isValidUser) throw new UnAuthenticatedError({code: 401, message: "Invalid credentials",logging: true});
 
-    const token = JWTService.generateUserToken(user);   
+    const token = generateUserToken({userId : user._id, email: user.email});   
     const oneDay : number = 1000 * 60 * 60 * 24;
 
     res.cookie("token",token,{
         httpOnly: true,
         expires: new Date(Date.now() + oneDay),
     });
+    // console.log(token);
+    
 
-    res.json({msg : "user logged in"})
+    res.json({token});
 
 }
 

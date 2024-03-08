@@ -1,5 +1,5 @@
 import { Request, Response } from "express"
-import { IGetUserAuthInfoRequest } from "../utils/jwt";
+import {Req} from "../utils/jwt";
 import jobModel from "./job.model"
 import BadRequestError from "../errors/BadRequestError";
 import NotFoundError from "../errors/NotFoundError";
@@ -7,12 +7,16 @@ import NotFoundError from "../errors/NotFoundError";
 
 // create job
 export const createJob = async(req: Request,res:Response) => {
+        
+        
+        req.body.formData.createdBy = req.body.user.userId;
+        console.log(req.body);
+        
+        const {company, position} = req.body.formData;
+        const job = await jobModel.findOne({company,position});
 
-        req.body.createdBy = (req as IGetUserAuthInfoRequest).user.userId;
-        const {company, position, location} = req.body;
-        const job = await jobModel.find({company,position,location});
         if(job) throw new BadRequestError({code: 400,message: "Already job exist",logging: true});
-        const newJob = await jobModel.create(req.body);
+        const newJob = await jobModel.create(req.body.formData);
        
         res.status(201).json({newJob});
 }

@@ -15,6 +15,13 @@ import {
 import { ToastContainer } from "react-toastify";
 import { GlobalStyle } from "./styles/global.ts";
 
+export const checkDefaultTheme = () => {
+  const isDarkTheme = localStorage.getItem("dark-theme") === "true";
+  document.body.classList.toggle("dark-theme", isDarkTheme);
+  return isDarkTheme;
+};
+checkDefaultTheme();
+
 const router = createBrowserRouter([
   {
     path: "/",

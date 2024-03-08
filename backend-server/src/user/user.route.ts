@@ -1,4 +1,8 @@
 import { Router } from "express";
+import { getCurrentUser } from "./user.controller";
 
-const userRouter = Router();
+export const userRouter = Router();
+
+userRouter.post("/get-current-user",getCurrentUser);
+
 

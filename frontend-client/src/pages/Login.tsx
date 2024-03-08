@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate, useNavigation } from "react-router-dom";
 import { FormRow } from "../components";
 import { customFetch } from "../utils/customFetch";
-import { toast } from "react-toastify";
+// import { toast } from "react-toastify";
 import Wrapper from "../assets/wrappers/RegisterAndLoginPage";
 
 interface ILoginFormData {
@@ -29,8 +29,12 @@ const Login: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     try {
-      await customFetch.post("/auth/login", formData);
+      const response = await customFetch.post("/auth/login", formData);
+
+      const token = response.data.token;
+      localStorage.setItem("token", token);
       alert("Success login");
       return navigate("/dashboard");
     } catch (error) {

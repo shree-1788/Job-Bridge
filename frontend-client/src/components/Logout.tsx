@@ -13,7 +13,9 @@ const LogoutContainer: React.FC = () => {
 
   const logoutUser = async () => {
     navigate("/");
+
     await customFetch("/auth/logout");
+    localStorage.clear();
     alert("Logged out successfully");
   };
   return (

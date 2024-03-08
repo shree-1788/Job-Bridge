@@ -4,7 +4,7 @@ import Wrapper from "../assets/wrappers/Error";
 import img from "../assets/images/not-found.svg";
 const ErrorPage: React.FC = () => {
   const error = useRouteError();
-  console.log(error);
+
   if (error.status === 404) {
     return (
       <Wrapper>

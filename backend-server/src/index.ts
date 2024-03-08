@@ -7,7 +7,8 @@ import { dbConnect } from "./db/db";
 import { jobRouter } from "./jobs/job.route";
 import { errorHandler } from './middlewares/errorHandlerMiddleware';
 import { authRouter } from './auth/auth.route';
-import cookieParser from "cookie-parser";
+import { userRouter } from './user/user.route';
+import cookieParser from 'cookie-parser';
 import { authenticateUser } from './middlewares/authMiddleware';
 import cors from "cors";
 
@@ -16,7 +17,8 @@ const port = process.env.PORT || 8000;
 
 const allowedOrigins: Array<string> = ["http://localhost:5173"];
  const options : cors.CorsOptions = {
-    origin: allowedOrigins
+    origin: allowedOrigins,
+    credentials: true
  }
 
 app.use(cors(options));
@@ -24,8 +26,9 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(errorHandler);
 
-app.use("/api/job",jobRouter);
-app.use("/api/auth",authenticateUser,authRouter);
+app.use("/api/job",authenticateUser,jobRouter);
+app.use("/api/auth",authRouter);
+app.use("/api/user",authenticateUser,userRouter);
 
 app.get("/", (req: Request, res:Response)=> {
     res.send("Hello from home");
